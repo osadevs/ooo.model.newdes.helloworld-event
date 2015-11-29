@@ -32,12 +32,12 @@
  * <p> In order to control the scheduling of events, OSA actually provides two 
  * incremental APIs:
  * <ul>
- * <li> The {@link fr.inria.osa.simapis.basic.EventDrivenAPI} is an <i>asynchronous</i>
+ * <li> The {@link org.osadev.osa.simapis.basic.EventDrivenAPI} is an <i>asynchronous</i>
  * API that allows for the fast scheduling of call-back methods at given simulation times.
  * A first limitation of this API is that all scheduled actions must start and complete
  * at the same virtual (simulation) time. Another limitation of this API (consistent with
  * the previous one) is that it does not support synchronization driven events.
- * <li> The {@link fr.inria.osa.simapis.basic.SimulationProcessAPI} <code>extends</code> the 
+ * <li> The {@link org.osadev.osa.simapis.basic.SimulationProcessAPI} <code>extends</code> the 
  * previous asynchronous API with the notion of a process. A process is very similar
  * to a thread (and is actually most likely implemented by one): it can execute
  * sequences of actions and get results from these actions even if those actions
@@ -109,8 +109,8 @@
  * 
  * <ul>
  * <li> <b>Each Fractal component whose content part extends one of OSA's Abstract Model</b>
- * (either {@link fr.inria.osa.simapis.basic.AbstractEventModel} or
- * {@link fr.inria.osa.simapis.basic.AbstractProcessModel}), becomes a <i>simulation model</i>.
+ * (either {@link org.osadev.osa.simapis.basic.AbstractEventModel} or
+ * {@link org.osadev.osa.simapis.basic.AbstractProcessModel}), becomes a <i>simulation model</i>.
  * As such it is created either with a "simBasicPrimitive" Fractal membrane, or a
  * "simPrimitive" membrane, respectively for the event-driven or process-oriented models. 
  * This membrane adds a new Simulation Controller that
@@ -148,7 +148,7 @@
  * be created and invoked within the component to which it belongs. OSA events contain 
  * the name of a method, a reference to an internal object of the component on which 
  * to call the method, a list of parameters and a time of execution (see 
- * {@link fr.inria.osa.simapis.basic.EventDrivenAPI}). Since events can only be created
+ * {@link org.osadev.osa.simapis.basic.EventDrivenAPI}). Since events can only be created
  * internally by components for themselves, a interface is provided to request a component
  * to do so. This interface is implemented by the simulation controller and made available
  * both for other components to allow exogeneous event scheduling, and to the component
@@ -185,44 +185,24 @@
  * 
  * <h3>The Event-driven Hello-World explained</h3>
  * 
+ * FIXME: Update this doc...
+ * 
  * In this basic example, the Hello component does explicitly use the OSA 
- * simulation API, but it still extends the {@link fr.inria.osa.simapis.basic.AbstractEventModeling} 
+ * simulation API, but it still extends the {@link org.osadev.osa.simapis.wrappers.llong.EventModel} 
  * class in order for the OSA logging facility to work properly (the logging
  * mechanism needs the current simulation time). Contrary to the Fractal version, 
  * the OSA Hello does not require an additional interface to start the execution
  * (such as Main or Runnable). Indeed, in OSA, the execution can be started 
  * directly from the program main method using the OSA bootstrap scheduling service.
  * 
- * <p>More precisely, the scheduling in OSA can be accessed in different manners:
- * <ul>
- * <li> During the execution of the simulation, new events can be scheduled using 
- * the {@link fr.inria.osa.simapis.basic.EventModelingAPI#scheduleMyself(String, Object[], long)}
+ * <p>During the execution of the simulation, new events can be scheduled using 
+ * the {@link org.osadev.osa.simapis.basic.EventModelingAPI#scheduleEventMyself(String, Object[], ModelingTimeAPI)}
  * method. Assuming the implementation details of a given component are 
  * not supposed to be known outside of this component, this method is primarily 
  * intended for internal use within a given model, hence the "Myself" suffix.
  * However, no technical restriction would prohibit the use of this interface 
  * externally, if the name of the internal method to be scheduled is known from
  * outside a component.
- * For example, assuming the variable <code>helloRef</code> contains a reference to
- * the Fractal component instance of the Hello model, we could schedule the execution
- * of the method generateHello() with no parameters from the main method of the program
- * as follows:
- * 
- * 
- * 
- * <li>
- *
- * facility.
- * 
- * ADL extension.
- * 
- * function 
- * {@link fr.inria.osa.simapis.basic.EventModelingAPI#scheduleMyself(String, Object[], long)}
- * 
- * it just uses the Fractal binding machinery to request a service from the world 
- * component. Because no waiting or scheduling is requested at this point, the call
- * is synchronous in simulated time between both components. Once the requests arrives at
- * the server, TBC...
  * 
  * </ul>
  * @author odalle
