@@ -20,7 +20,7 @@
 		<artifactId>osa-model-newdes</artifactId>
 		<groupId>org.osadev.osa.model.newdes</groupId>
 		<version>0.8.1-SNAPSHOT</version>
-		<relativePath>../ooo.model-newdes/</relativePath>
+		<relativePath>../ooo.model.newdes/</relativePath>
 	</parent>
 	<artifactId>osa-model-newdes-event-helloworld</artifactId>
 	<name>OSA event-driven hello-world example model</name>
